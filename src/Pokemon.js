@@ -3,6 +3,7 @@ import { Typography, Link, CircularProgress, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { toFirstCharUppercase } from './constants';
 import axios from 'axios';
+import Counter from './counter';
 
 const styles = makeStyles (theme=> ({
   CardPokemon:{
@@ -56,7 +57,7 @@ const Pokemon = (props) => {
     <>
       {pokemon === undefined && <CircularProgress />}
       {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
-      {pokemon === false && <Typography> Pokemon not found</Typography>}
+      {pokemon === false && <Counter />}
 
       {pokemon !== undefined && (
         <Button variant="contained" onClick={() => history.push("/")}>

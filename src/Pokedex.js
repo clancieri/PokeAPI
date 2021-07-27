@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, CircularProgress, Typography, TextField } from '@material-ui/core';
+import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, CircularProgress, Typography, TextField, Button } from '@material-ui/core';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { toFirstCharUppercase } from './constants';
@@ -39,7 +39,6 @@ const Pokedex = (props) => {
   const classes = useStyles ();
   const [pokemonData, setPokemonData] = useState({});
   const [filter, setFilter] = useState ("");
-  const [cuenta, setCuenta] = useState (0);
 
   const handleSearchChange = (e) => {
     setFilter (e.target.value);
@@ -60,22 +59,20 @@ const Pokedex = (props) => {
         
         };
       });
-      console.log(`nombrepokemon: ${cuenta}`);
+      
       setPokemonData(newPokemonData);
     })
 
-  }, [cuenta]);
+  }, []);
 
   
 const getPokemonCard = (pokemonId) => {
   const { id, name, sprite } = pokemonData[pokemonId];
 
 
-// abajo, en CARD on click, ver para agregar estadisticas
   return (
     <Grid item xs={12} sm={4} key={pokemonId}>
     <Card onClick ={() => history.push(`/${id}`)}> 
-    <Card onClick={() => setCuenta(cuenta + 1)}>
       <CardMedia 
       className={classes.CardMedia}
       image={sprite}
@@ -84,7 +81,6 @@ const getPokemonCard = (pokemonId) => {
       <CardContent className={classes.cardContent}>
             <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
       </CardContent>
-      </Card>
     </Card>
   </Grid>
   );
@@ -93,6 +89,7 @@ const getPokemonCard = (pokemonId) => {
   return (
     <>
     <AppBar position="static">
+   
       <Toolbar>
         <div className={classes.searchContainer}>
           <SearchIcon className={classes.SearchIcon} />
@@ -103,6 +100,10 @@ const getPokemonCard = (pokemonId) => {
            variant="standard"
 
           />
+        </div>
+        <div className={classes.searchContainer}>
+        <Button onClick={() => history.push("/stadistics")}>
+          Estadisticas       </Button>
         </div>
       </Toolbar>
     </AppBar>
